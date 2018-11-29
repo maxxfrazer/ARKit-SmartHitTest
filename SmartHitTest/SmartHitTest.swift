@@ -30,7 +30,9 @@ public extension ARSCNView {
 
 		// 1. Check for a result on an existing plane using geometry.
 		if let existingPlaneUsingGeometryResult = results.first(where: { $0.type == .existingPlaneUsingGeometry }),
-			let planeAnchor = existingPlaneUsingGeometryResult.anchor as? ARPlaneAnchor, allowedAlignments.contains(planeAnchor.alignment) {
+			let planeAnchor = existingPlaneUsingGeometryResult.anchor as? ARPlaneAnchor,
+			allowedAlignments.contains(planeAnchor.alignment) {
+
 			return existingPlaneUsingGeometryResult
 		}
 
@@ -43,26 +45,34 @@ public extension ARSCNView {
 			let infinitePlaneResults = hitTest(point, types: .existingPlane)
 
 			for infinitePlaneResult in infinitePlaneResults {
-				if let planeAnchor = infinitePlaneResult.anchor as? ARPlaneAnchor, allowedAlignments.contains(planeAnchor.alignment) {
-					if planeAnchor.alignment == .vertical {
-						// Return the first vertical plane hit test result.
-						return infinitePlaneResult
-					} else {
-						// For horizontal planes we only want to return a hit test result
-						// if it is close to the current object's position.
-						if let objectY = objectPosition?.y {
-							let planeY = infinitePlaneResult.worldTransform.translation.y
-							if objectY > planeY - 0.05 && objectY < planeY + 0.05 {
-								return infinitePlaneResult
-							}
-						} else {
+				guard let planeAnchor = infinitePlaneResult.anchor as? ARPlaneAnchor,
+					allowedAlignments.contains(planeAnchor.alignment) else {
+					continue
+				}
+				if planeAnchor.alignment == .vertical {
+					// Return the first vertical plane hit test result.
+					return infinitePlaneResult
+				} else {
+					// For horizontal planes we only want to return a hit test result
+					// if it is close to the current object's position.
+					if let objectY = objectPosition?.y {
+						let planeY = infinitePlaneResult.worldTransform.translation.y
+						if objectY > planeY - 0.05 && objectY < planeY + 0.05 {
 							return infinitePlaneResult
 						}
+					} else {
+						return infinitePlaneResult
 					}
 				}
 			}
 		}
+		return self.smartHitTestFallback(allowedAlignments: allowedAlignments, results: results)
+	}
 
+	private func smartHitTestFallback(
+		allowedAlignments: [ARPlaneAnchor.Alignment],
+		results: [ARHitTestResult]
+	) -> ARHitTestResult? {
 		// 3. As a final fallback, check for a result on estimated planes.
 		let vResult = results.first(where: { $0.type == .estimatedVerticalPlane })
 		let hResult = results.first(where: { $0.type == .estimatedHorizontalPlane })
