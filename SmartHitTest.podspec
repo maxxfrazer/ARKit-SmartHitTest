@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name         = "SmartHitTest"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "SmartHitTest allows users to get a pretty good estimate of a hitTest on vertical or horizontal planes."
   s.description  = <<-DESC
   					SmartHitTest allows users to get a pretty good estimate of a hitTest on vertical or horizontal planes.
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.author             = "Max Cobb"
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.source       = { :git => "https://github.com/maxxfrazer/ARKit-SmartHitTest.git", :tag => "#{s.version}" }
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
   s.ios.deployment_target = '12.0'
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.source_files  = "SmartHitTest/*.swift"
