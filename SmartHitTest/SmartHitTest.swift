@@ -18,7 +18,7 @@ public extension ARSCNView {
 	///   - objectPosition: Used for dragging objects in AR, will add Apple's bits for this later
 	///   - allowedAlignments: What plane alignments you want to use for the hit test
 	/// - Returns: ARHitTestResult, check the
-	public func smartHitTest(
+	func smartHitTest(
 		_ point: CGPoint? = nil, infinitePlane: Bool = false, objectPosition: float3? = nil,
 		allowedAlignments: [ARPlaneAnchor.Alignment] = [.horizontal, .vertical]
 	) -> ARHitTestResult? {
