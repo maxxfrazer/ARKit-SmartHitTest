@@ -12,13 +12,13 @@ import simd
 internal extension float4x4 {
 	/// Treats the 4x4 matrix as a transform matrix, where the translation is
 	/// stored in the first 3 rows of the 3rd column
-	var translation: float3 {
+	var translation: SIMD3<Float> {
 		get {
 			let translation = columns.3
-			return float3(translation.x, translation.y, translation.z)
+			return SIMD3<Float>(translation.x, translation.y, translation.z)
 		}
 		set(newValue) {
-			columns.3 = float4(newValue.x, newValue.y, newValue.z, columns.3.w)
+			columns.3 = SIMD4<Float>(newValue.x, newValue.y, newValue.z, columns.3.w)
 		}
 	}
 }

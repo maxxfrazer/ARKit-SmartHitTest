@@ -18,5 +18,5 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
   s.ios.deployment_target = '11.3'
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.source_files  = "SmartHitTest/*.swift"
+  s.source_files  = "Sources/SmartHitTest/*.swift"
 end

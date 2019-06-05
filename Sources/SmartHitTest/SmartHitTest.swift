@@ -19,7 +19,7 @@ public extension ARSCNView {
 	///   - allowedAlignments: What plane alignments you want to use for the hit test
 	/// - Returns: ARHitTestResult, check the
 	func smartHitTest(
-		_ point: CGPoint? = nil, infinitePlane: Bool = false, objectPosition: float3? = nil,
+		_ point: CGPoint? = nil, infinitePlane: Bool = false, objectPosition: SIMD3<Float>? = nil,
 		allowedAlignments: [ARPlaneAnchor.Alignment] = [.horizontal, .vertical]
 	) -> ARHitTestResult? {
 
