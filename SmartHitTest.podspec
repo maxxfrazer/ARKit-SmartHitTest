@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name         = "SmartHitTest"
-  s.version      = "1.1.1"
+  s.version      = "2.0.0"
   s.summary      = "SmartHitTest allows users to get a pretty good estimate of a hitTest on vertical or horizontal planes."
   s.description  = <<-DESC
   					SmartHitTest allows users to get a pretty good estimate of a hitTest on vertical or horizontal planes.
