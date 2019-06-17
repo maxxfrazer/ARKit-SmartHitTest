@@ -11,7 +11,7 @@ import ARKit
   import RealityKit
 #endif
 
-public protocol ARSmartHitTest where Self: UIView {
+public protocol ARSmartHitTest where Self: UIView & ARSessionProviding {
   /// hitTest uses a series of methods to estimate the position of the anchor, like looking
   /// for the best position based on what we know about other detected planes in the scene
   ///
