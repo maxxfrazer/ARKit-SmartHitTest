@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.source       = { :git => "https://github.com/maxxfrazer/ARKit-SmartHitTest.git", :tag => "#{s.version}" }
   s.swift_version = '5.0'
-  s.ios.deployment_target = '11.3'
+  s.ios.deployment_target = '11.0'
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.source_files  = "Sources/SmartHitTest/*.swift"
 end
