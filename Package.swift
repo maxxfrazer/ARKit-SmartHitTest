@@ -5,16 +5,8 @@ import PackageDescription
 
 let package = Package(
   name: "SmartHitTest",
-  platforms: [
-    .iOS(.v11)
-  ],
-  products: [
-    .library(name: "SmartHitTest", targets: ["SmartHitTest"]),
-  ],
-  targets: [
-    .target(name: "SmartHitTest", dependencies: [])
-  ],
-  swiftLanguageVersions: [
-    .v5
-  ]
+  platforms: [.iOS(.v11)],
+  products: [.library(name: "SmartHitTest", targets: ["SmartHitTest"])],
+  targets: [.target(name: "SmartHitTest")],
+  swiftLanguageVersions: [.v5]
 )

@@ -14,7 +14,7 @@ It was found inside the downloadable project on the following page:
 https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
 
 ## Requirements
-- Xcode 11
+- Xcode 11.0
 - Swift 5.0
 - iOS 11.0 (ARKit)
 

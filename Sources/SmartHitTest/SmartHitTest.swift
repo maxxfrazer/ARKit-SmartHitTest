@@ -8,6 +8,7 @@
 
 import ARKit
 
+/// It's recommended to use either ARSCNView or ARView when using this protocol
 public protocol ARSmartHitTest where Self: UIView & ARSessionProviding {
   /// hitTest uses a series of methods to estimate the position of the anchor, like looking
   /// for the best position based on what we know about other detected planes in the scene
