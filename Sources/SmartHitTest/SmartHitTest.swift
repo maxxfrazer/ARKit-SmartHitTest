@@ -35,7 +35,7 @@ public protocol ARSmartHitTest where Self: UIView & ARSessionProviding {
   func hitTest(_ point: CGPoint, types: ARHitTestResult.ResultType) -> [ARHitTestResult]
 }
 
-extension ARSmartHitTest {
+public extension ARSmartHitTest {
 
   func smartHitTest(
     _ point: CGPoint? = nil, infinitePlane: Bool = false, objectPosition: SIMD3<Float>? = nil,
