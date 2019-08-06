@@ -10,24 +10,6 @@ import ARKit
 
 /// It's recommended to use either ARSCNView or ARView when using this protocol
 public protocol ARSmartHitTest where Self: UIView & ARSessionProviding {
-  /// hitTest uses a series of methods to estimate the position of the anchor, like looking
-  /// for the best position based on what we know about other detected planes in the scene
-  ///
-  /// - Parameters:
-  ///   - point: A point in the 2D coordinate system of the view.
-  ///   - infinitePlane: set this to true if you're moving an object around on a plane
-  ///   - objectPosition: Used for dragging objects in AR, will add Apple's bits for this later
-  ///   - allowedAlignments: What plane alignments you want to use for the hit test
-  /// - Returns: ARHitTestResult, check the
-  func smartHitTest(
-    _ point: CGPoint?, infinitePlane: Bool, objectPosition: SIMD3<Float>?,
-    allowedAlignments: [ARPlaneAnchor.Alignment]
-  ) -> ARHitTestResult?
-
-  func smartHitTestFallback(
-    allowedAlignments: [ARPlaneAnchor.Alignment],
-    results: [ARHitTestResult]
-	) -> ARHitTestResult?
 
   /// This hitTest function deifnition is provided with both ARSCNView (SceneKit) and ARView (RealityKit)
   /// - Parameter point: A point in the view’s coordinate system.
@@ -35,8 +17,16 @@ public protocol ARSmartHitTest where Self: UIView & ARSessionProviding {
   func hitTest(_ point: CGPoint, types: ARHitTestResult.ResultType) -> [ARHitTestResult]
 }
 
+/// hitTest uses a series of methods to estimate the position of the anchor, like looking
+/// for the best position based on what we know about other detected planes in the scene
 public extension ARSmartHitTest {
 
+  /// - Parameters:
+  ///   - point: A point in the 2D coordinate system of the view.
+  ///   - infinitePlane: set this to true if you're moving an object around on a plane
+  ///   - objectPosition: Used for dragging objects in AR, will add Apple's bits for this later
+  ///   - allowedAlignments: What plane alignments you want to use for the hit test
+  /// - Returns: ARHitTestResult, check the
   func smartHitTest(
     _ point: CGPoint? = nil, infinitePlane: Bool = false, objectPosition: SIMD3<Float>? = nil,
     allowedAlignments: [ARPlaneAnchor.Alignment] = []
@@ -99,7 +89,7 @@ public extension ARSmartHitTest {
     return self.smartHitTestFallback(allowedAlignments: alignments, results: results)
   }
 
-  private func smartHitTestFallback(
+  func smartHitTestFallback(
     allowedAlignments: [ARPlaneAnchor.Alignment],
     results: [ARHitTestResult]
     ) -> ARHitTestResult? {
