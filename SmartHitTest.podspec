@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name         = "SmartHitTest"
   s.version      = "2.0.0"
-  s.summary      = "SmartHitTest allows users to get a pretty good estimate of a hitTest on vertical or horizontal planes."
+  s.summary      = "SmartHitTest allows users to get a pretty good estimate of a hitTest on vertical or horizontal planes. Works with both SceneKit and RealityKit"
   s.description  = <<-DESC
   					SmartHitTest allows users to get a pretty good estimate of a hitTest on vertical or horizontal planes.
             This function is only a slight alteration of Apple's code found at this location:

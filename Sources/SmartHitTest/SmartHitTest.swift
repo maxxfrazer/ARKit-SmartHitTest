@@ -7,9 +7,6 @@
 //
 
 import ARKit
-#if canImport(RealityKit)
-  import RealityKit
-#endif
 
 public protocol ARSmartHitTest where Self: UIView & ARSessionProviding {
   /// hitTest uses a series of methods to estimate the position of the anchor, like looking
@@ -30,6 +27,11 @@ public protocol ARSmartHitTest where Self: UIView & ARSessionProviding {
     allowedAlignments: [ARPlaneAnchor.Alignment],
     results: [ARHitTestResult]
 	) -> ARHitTestResult?
+
+  /// This hitTest function deifnition is provided with both ARSCNView (SceneKit) and ARView (RealityKit)
+  /// - Parameter point: A point in the view’s coordinate system.
+  /// - Parameter types: The hit test search type to look for.
+  func hitTest(_ point: CGPoint, types: ARHitTestResult.ResultType) -> [ARHitTestResult]
 }
 
 extension ARSmartHitTest {
@@ -49,21 +51,11 @@ extension ARSmartHitTest {
         resultTypes = [.estimatedHorizontalPlane]
       }
     }
-    var hitTest: ((_: CGPoint, _: ARHitTestResult.ResultType) -> [ARHitTestResult])!
-    hitTest = (self as? ARSCNView)?.hitTest
-    if hitTest == nil {
-      if #available(iOS 13, *), let arView = self as? ARView {
-        hitTest = arView.hitTest
-      } else {
-        print("ARSmartHitTest is only appropriate for ARSCNView and ARView class types")
-        return nil
-      }
-    }
 
     let point = point ?? CGPoint(x: self.bounds.midX, y: self.bounds.midY)
 
     // Perform the hit test.
-    let results = hitTest(point, resultTypes)
+    let results = self.hitTest(point, types: resultTypes)
 
     // 1. Check for a result on an existing plane using geometry.
     if #available(iOS 13, *), let existingPlaneUsingGeometryResult = results.first(where: { $0.type == .existingPlaneUsingGeometry }),
@@ -79,7 +71,7 @@ extension ARSmartHitTest {
       //    Loop through all hits against infinite existing planes and either return the
       //    nearest one (vertical planes) or return the nearest one which is within 5 cm
       //    of the object's position.
-      let infinitePlaneResults = hitTest(point, .existingPlane)
+      let infinitePlaneResults = hitTest(point, types: .existingPlane)
 
       for infinitePlaneResult in infinitePlaneResults {
         guard let planeAnchor = infinitePlaneResult.anchor as? ARPlaneAnchor,
