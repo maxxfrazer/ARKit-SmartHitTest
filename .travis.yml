@@ -1,15 +1,13 @@
 language: objective-c
-osx_image: xcode11.0
+osx_image: xcode10.2
 before_install:
   - gem install cocoapods
-  - swift package generate-xcodeproj
-# install:
-#   - ./install_swiftlint.sh
+install:
+  - ./install_swiftlint.sh
 script:
   - gem install travis --no-document
   - travis lint .travis.yml --no-interactive
   - swiftlint
-  - xcodebuild clean build -project SmartHitTest.xcodeproj -scheme SmartHitTest-Package -destination "platform=iOS Simulator,OS=13.0,name=iPhone Xs" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+  - swift package generate-xcodeproj
+  - xcodebuild clean build -project SmartHitTest.xcodeproj -scheme SmartHitTest-Package -destination "platform=iOS Simulator,name=iPhone Xs" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
   - pod lib lint
-env:
-  - SWIFT_VERSION=5.0

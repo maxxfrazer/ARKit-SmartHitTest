@@ -9,7 +9,7 @@
 import ARKit
 
 /// It's recommended to use either ARSCNView or ARView when using this protocol
-public protocol ARSmartHitTest where Self: UIView & ARSessionProviding {
+public protocol ARSmartHitTest where Self: UIView {
 
   /// This hitTest function deifnition is provided with both ARSCNView (SceneKit) and ARView (RealityKit)
   /// - Parameter point: A point in the view’s coordinate system.
